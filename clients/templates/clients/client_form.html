@@ -1,0 +1,13 @@
+{% extends 'clients/base.html' %}
+
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">{{ action }} Client</h2>
+<form method="post" class="bg-white p-6 rounded-lg shadow-md">
+    {% csrf_token %}
+    <div class="mb-4">
+        {{ form.as_p }}
+    </div>
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
+</form>
+<a href="{% url 'client-list' %}" class="text-blue-600 hover:underline mt-4 inline-block">Back to Clients List</a>
+{% endblock %}

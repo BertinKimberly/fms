@@ -1,0 +1,52 @@
+{% extends 'freelancers/base.html' %}
+
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">Freelancers</h2>
+<a href="{% url 'freelancer-create' %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200 mb-4 inline-block">Add New Freelancer</a>
+
+<div class="overflow-x-auto">
+    <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
+        <thead>
+            <tr class="bg-gray-200 text-gray-600 uppercase text-sm">
+                <th class="py-3 px-4 text-left">First Name</th>
+                <th class="py-3 px-4 text-left">Last Name</th>
+                <th class="py-3 px-4 text-left">Email</th>
+                <th class="py-3 px-4 text-left">Phone Number</th>
+                <th class="py-3 px-4 text-left">Skills</th>
+                <th class="py-3 px-4 text-left">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for freelancer in freelancers %}
+            <tr class="hover:bg-gray-100">
+                <td class="py-2 px-4 border-b">{{ freelancer.first_name }}</td>
+                <td class="py-2 px-4 border-b">{{ freelancer.last_name }}</td>
+                <td class="py-2 px-4 border-b">{{ freelancer.email }}</td>
+                <td class="py-2 px-4 border-b">{{ freelancer.phone }}</td>
+                <td class="py-2 px-4 border-b">{{ freelancer.skills }}</td>
+                <td class="py-2 px-4 border-b">
+                    <a href="{% url 'freelancer-edit' freelancer.id %}" class="text-yellow-600 hover:underline">Edit</a>
+                    <a href="{% url 'freelancer-delete' freelancer.id %}" class="text-red-600 hover:underline ml-2">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center py-2">No freelancers available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="mt-4 flex justify-between items-center">
+    <div class="flex space-x-2">
+        {% if freelancers.has_previous %}
+            <a href="?page={{ freelancers.previous_page_number }}" class="text-blue-600 hover:underline">Previous</a>
+        {% endif %}
+        <span class="text-gray-700">Page {{ freelancers.number }} of {{ freelancers.paginator.num_pages }}</span>
+        {% if freelancers.has_next %}
+            <a href="?page={{ freelancers.next_page_number }}" class="text-blue-600 hover:underline">Next</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

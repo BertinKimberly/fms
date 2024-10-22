@@ -1,0 +1,19 @@
+from clients.models import Client
+from faker import Faker
+import random
+
+fake = Faker()
+
+clients = []
+
+for _ in range(500):
+    name = fake.name()
+    email = fake.unique.email()
+    phone = fake.phone_number()[:15] 
+    address = fake.address()
+    client = Client(name=name, email=email, phone=phone, address=address)
+    clients.append(client)
+
+Client.objects.bulk_create(clients)
+
+print("500,000 Client records created successfully.")

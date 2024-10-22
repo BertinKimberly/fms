@@ -1,0 +1,22 @@
+{% extends 'invoices/base.html' %}
+
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">Delete Invoice</h2>
+<p class="mb-4 text-gray-700">Are you sure you want to delete Invoice #{{ object.id }}?</p>
+
+<form method="post" class="flex items-center space-x-4">
+    {% csrf_token %}
+    <button
+        type="submit"
+        class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-200"
+    >
+        Yes, Delete
+    </button>
+    <a
+        href="{% url 'invoice-list' %}"
+        class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 transition duration-200"
+    >
+        Cancel
+    </a>
+</form>
+{% endblock %}

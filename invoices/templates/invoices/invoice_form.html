@@ -1,0 +1,23 @@
+{% extends 'invoices/base.html' %}
+
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">{{ view.action }} Invoice</h2>
+
+<form method="post" class="space-y-4">
+    {% csrf_token %}
+    {{ form.as_p|safe }}  <!-- Ensure form fields are rendered correctly -->
+    <button 
+        type="submit" 
+        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"
+    >
+        Save
+    </button>
+</form>
+
+<a 
+    href="{% url 'invoice-list' %}" 
+    class="inline-block mt-4 text-blue-600 hover:underline"
+>
+    Back to Invoices List
+</a>
+{% endblock %}

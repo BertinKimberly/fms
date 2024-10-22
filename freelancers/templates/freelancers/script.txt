@@ -1,0 +1,42 @@
+from freelancers.models import Freelancer
+from faker import Faker
+from decimal import Decimal
+import random
+
+fake = Faker()
+
+skills_list = [
+    "Python, Django, JavaScript",
+    "React, Node.js, Express",
+    "HTML, CSS, Bootstrap",
+    "Machine Learning, Data Analysis",
+    "iOS Development, Swift",
+    "Android Development, Kotlin",
+    "Database Management, SQL",
+    "Graphic Design, Photoshop",
+    "DevOps, AWS, Docker",
+    "Project Management, Agile"
+]
+
+freelancers = []
+
+for _ in range(500):
+    first_name = fake.first_name()
+    last_name = fake.last_name()
+    email = fake.unique.email()
+    phone = fake.phone_number()[:15]
+    skills = random.choice(skills_list)[:50]
+    hourly_rate = Decimal(f"{random.uniform(20.00, 150.00):.2f}")
+    freelancer = Freelancer(
+        first_name=first_name,
+        last_name=last_name,
+        email=email,
+        phone=phone,
+        skills=skills,
+        hourly_rate=hourly_rate
+    )
+    freelancers.append(freelancer)
+
+Freelancer.objects.bulk_create(freelancers)
+
+print("500 Freelancer records created successfully.")

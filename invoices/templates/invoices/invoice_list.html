@@ -1,0 +1,44 @@
+{% extends 'invoices/base.html' %}
+
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">Invoices</h2>
+<a href="{% url 'invoice-create' %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200 mb-10">Add New Invoice</a>
+
+<div class="overflow-x-auto mt-10">
+    <table class="min-w-full border-collapse border border-gray-300">
+        <thead class="bg-gray-200">
+            <tr>
+                <th class="px-4 py-2 border border-gray-300">Client</th>
+                <th class="px-4 py-2 border border-gray-300">Freelancer</th>
+                <th class="px-4 py-2 border border-gray-300">Description</th>
+                <th class="px-4 py-2 border border-gray-300">Amount</th>
+                <th class="px-4 py-2 border border-gray-300">Issue Date</th>
+                <th class="px-4 py-2 border border-gray-300">Due Date</th>
+                <th class="px-4 py-2 border border-gray-300">Status</th>
+                <th class="px-4 py-2 border border-gray-300">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for invoice in object_list %}
+            <tr class="hover:bg-gray-100">
+                <td class="px-4 py-2 border border-gray-300">{{ invoice.client }}</td>
+                <td class="px-4 py-2 border border-gray-300">{{ invoice.freelancer }}</td>
+                <td class="px-4 py-2 border border-gray-300">{{ invoice.description }}</td>
+                <td class="px-4 py-2 border border-gray-300">{{ invoice.amount }}</td>
+                <td class="px-4 py-2 border border-gray-300">{{ invoice.issue_date }}</td>
+                <td class="px-4 py-2 border border-gray-300">{{ invoice.due_date }}</td>
+                <td class="px-4 py-2 border border-gray-300">{{ invoice.status }}</td>
+                <td class="px-4 py-2 border border-gray-300">
+                    <a href="{% url 'invoice-edit' invoice.id %}" class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600 transition duration-200">Edit</a>
+                    <a href="{% url 'invoice-delete' invoice.id %}" class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 transition duration-200">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8" class="text-center py-4">No invoices available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
