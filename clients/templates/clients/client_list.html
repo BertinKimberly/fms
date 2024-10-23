@@ -1,5 +1,5 @@
 
-{% extends 'clients/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 <h2 class="text-2xl font-bold mb-4">Clients</h2>
@@ -22,7 +22,7 @@
             <td class="py-2 px-4 border-b">{{ client.phone }}</td>
             <td class="py-2 px-4 border-b">{{ client.address }}</td>
             <td class="py-2 px-4 border-b">
-                <a href="{% url 'client-edit' client.id %}" class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600">Edit</a>
+                <a href="{% url 'client-edit' client.id %}" class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">Edit</a>
                 <a href="{% url 'client-delete' client.id %}" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">Delete</a>
             </td>
         </tr>

@@ -1,4 +1,4 @@
-{% extends 'freelancers/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 <h2 class="text-2xl font-bold mb-4">Freelancers</h2>
@@ -25,7 +25,7 @@
                 <td class="py-2 px-4 border-b">{{ freelancer.phone }}</td>
                 <td class="py-2 px-4 border-b">{{ freelancer.skills }}</td>
                 <td class="py-2 px-4 border-b">
-                    <a href="{% url 'freelancer-edit' freelancer.id %}" class="text-yellow-600 hover:underline">Edit</a>
+                    <a href="{% url 'freelancer-edit' freelancer.id %}" class="text-blue-600 hover:underline">Edit</a>
                     <a href="{% url 'freelancer-delete' freelancer.id %}" class="text-red-600 hover:underline ml-2">Delete</a>
                 </td>
             </tr>

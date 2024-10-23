@@ -20,7 +20,7 @@ skills_list = [
 
 freelancers = []
 
-for _ in range(500):
+for _ in range(200):
     first_name = fake.first_name()
     last_name = fake.last_name()
     email = fake.unique.email()

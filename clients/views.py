@@ -4,9 +4,10 @@ from .models import Client
 from .forms import ClientForm
 from django.core.paginator import Paginator
 from django.template import loader
+from django.contrib.auth.decorators import login_required
 
 
-
+@login_required(login_url="/users/login/")
 def client_list(request):
     client_queryset = Client.objects.all()
     

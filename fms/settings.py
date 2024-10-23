@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-d8syp=jil&)76_km*)o=0gihndg-mf@q^j%e&%o1)#8zv-y@*i
 DEBUG = True
 
 ALLOWED_HOSTS = []
+AUTH_USER_MODEL = 'users.CustomUser'
 
 
 
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'freelancers',
     'invoices',
     'clients',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -93,6 +95,8 @@ DATABASES = {  # pip install psycopg2
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {

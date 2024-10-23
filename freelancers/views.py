@@ -2,7 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Freelancer
 from .forms import FreelancerForm
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url="/users/login/")
 def freelancer_list(request):
     freelancer_queryset = Freelancer.objects.all()
     
