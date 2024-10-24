@@ -10,17 +10,12 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url="/users/login/")
 def client_list(request):
     client_queryset = Client.objects.all()
-    
-    # Set up pagination, e.g., 10 clients per page
     paginator = Paginator(client_queryset, 10)
-    
-    # Get the current page number from the request
     page_number = request.GET.get('page', 1)
-    
-    # Get the corresponding page of clients
     clients_page = paginator.get_page(page_number)
     
     return render(request, "clients/client_list.html", {"clients": clients_page})
+
 
 def create_client(request):
     if request.method == "POST":

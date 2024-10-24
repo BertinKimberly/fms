@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'freelancers',
     'invoices',
     'clients',
-    'users'
+    'users',
+    'projects'
 ]
 
 MIDDLEWARE = [
