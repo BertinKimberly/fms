@@ -1,0 +1,39 @@
+from invoices.models import Invoice
+from clients.models import Client
+from freelancers.models import Freelancer
+from faker import Faker
+import random
+from datetime import timedelta
+from django.utils import timezone
+
+fake = Faker()
+
+invoices = []
+
+clients = list(Client.objects.all())
+freelancers = list(Freelancer.objects.all())
+
+if not clients or not freelancers:
+    print("No clients or freelancers found. Please add some before running this script.")
+else:
+    for _ in range(500):
+        client = random.choice(clients)
+        freelancer = random.choice(freelancers)
+        description = fake.text(max_nb_chars=500)
+        amount = round(random.uniform(100, 10000), 2)
+        issue_date = fake.date_between(start_date='-1y', end_date='today')
+        due_date = issue_date + timedelta(days=random.randint(15, 60))
+        status = random.choice(['Pending', 'Paid', 'Overdue'])
+        invoice = Invoice(
+            client=client,
+            freelancer=freelancer,
+            description=description,
+            amount=amount,
+            issue_date=issue_date,
+            due_date=due_date,
+            status=status
+        )
+        invoices.append(invoice)
+    Invoice.objects.bulk_create(invoices)
+
+    print("500 Invoice records created successfully.")

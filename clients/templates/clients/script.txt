@@ -1,4 +1,6 @@
+
 from clients.models import Client
+from projects.models import Project
 from faker import Faker
 import random
 
@@ -6,14 +8,22 @@ fake = Faker()
 
 clients = []
 
-for _ in range(500):
-    name = fake.name()
-    email = fake.unique.email()
-    phone = fake.phone_number()[:15] 
-    address = fake.address()
-    client = Client(name=name, email=email, phone=phone, address=address)
-    clients.append(client)
+projects = list(Project.objects.all())
 
-Client.objects.bulk_create(clients)
+if not projects:
+    print("No projects found. Please add projects before running this script.")
+else:
+    for _ in range(500):
+        name = fake.name()  
+        email = fake.unique.email()  
+        phone = fake.phone_number()[:15]  
+        address = fake.address() 
+        project = random.choice(projects) 
+        
+        client = Client(name=name, email=email, phone=phone, address=address, project=project)
+        clients.append(client)
 
-print("500,000 Client records created successfully.")
+
+    Client.objects.bulk_create(clients)
+
+    print("500 Client records created successfully.")

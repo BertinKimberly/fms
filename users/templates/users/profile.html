@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<div class="container mx-auto my-12 p-6 bg-white rounded-lg shadow-lg">
+   <div class="flex items-center space-x-4">
+      <div class="flex-shrink-0">I</div>
+      <div>
+         <h1 class="text-3xl font-semibold text-blue-600">
+            {{ user.username }}
+         </h1>
+         <p class="text-gray-600">{{ user.email }}</p>
+         <p class="text-sm text-gray-500">Role: {{ user.role }}</p>
+      </div>
+   </div>
+   <div class="mt-6">
+      <h2 class="text-2xl font-bold mb-4">Profile Details</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+         <div>
+            <h3 class="text-lg font-semibold text-gray-800">Username</h3>
+            <p class="text-gray-600">{{ user.username }}</p>
+         </div>
+         <div>
+            <h3 class="text-lg font-semibold text-gray-800">Email</h3>
+            <p class="text-gray-600">{{ user.email }}</p>
+         </div>
+         <div>
+            <h3 class="text-lg font-semibold text-gray-800">Role</h3>
+            <p class="text-gray-600">{{ user.role }}</p>
+         </div>
+         <div>
+            <h3 class="text-lg font-semibold text-gray-800">Date Joined</h3>
+            <p class="text-gray-600">{{ user.date_joined|date:"M d, Y" }}</p>
+         </div>
+         <div>
+            <h3 class="text-lg font-semibold text-gray-800">Last Login</h3>
+            <p class="text-gray-600">{{ user.last_login|date:"M d, Y H:i" }}</p>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}
