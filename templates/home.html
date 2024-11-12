@@ -1,6 +1,97 @@
-{% extends 'base.html' %} {% block title %} Home {% endblock %}
- {% block content %}
-<h1>Home</h1>
-<p><a href="/clients/">View All clients</a></p>
+{% extends 'base.html' %} 
+{% block title %}Home{% endblock %} 
 
-{%endblock%}
+{% block content%}
+<h1 class="text-3xl font-bold mb-4">Dashboard</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+   <!-- Card for Total Projects -->
+   <div class="bg-white shadow-md rounded-lg p-4">
+      <h2 class="text-xl font-semibold">Total Projects</h2>
+      <p class="text-4xl font-bold text-blue-600">{{ total_projects }}</p>
+   </div>
+
+   <!-- Card for Total Clients -->
+   <div class="bg-white shadow-md rounded-lg p-4">
+      <h2 class="text-xl font-semibold">Total Clients</h2>
+      <p class="text-4xl font-bold text-green-600">{{ total_clients }}</p>
+   </div>
+
+   <!-- Card for Total Users -->
+   <div class="bg-white shadow-md rounded-lg p-4">
+      <h2 class="text-xl font-semibold">Total Users</h2>
+      <p class="text-4xl font-bold text-purple-600">{{ total_users }}</p>
+   </div>
+
+   <!-- Card for Total Freelancers -->
+   <div class="bg-white shadow-md rounded-lg p-4">
+      <h2 class="text-xl font-semibold">Total Freelancers</h2>
+      <p class="text-4xl font-bold text-red-600">{{ total_freelancers }}</p>
+   </div>
+</div>
+
+<div class="bg-white shadow rounded-lg p-4 mb-8">
+   <h2 class="text-2xl font-semibold mb-4">10 Most Recent Projects</h2>
+   <table
+      class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md"
+   >
+      <thead>
+         <tr class="bg-gray-200 text-gray-700">
+            <th class="py-2 px-4 border-b">Name</th>
+            <th class="py-2 px-4 border-b">Field</th>
+            <th class="py-2 px-4 border-b">Budget</th>
+            <th class="py-2 px-4 border-b">Description</th>
+         </tr>
+      </thead>
+      <tbody>
+         {% for project in recent_projects %}
+         <tr class="hover:bg-gray-100">
+            <td class="py-2 px-4 border-b">{{ project.name }}</td>
+            <td class="py-2 px-4 border-b">{{ project.field }}</td>
+            <td class="py-2 px-4 border-b">{{ project.budget }}</td>
+            <td class="py-2 px-4 border-b">
+               {{ project.description|truncatewords:10 }}
+            </td>
+         </tr>
+         {% empty %}
+         <tr>
+            <td
+               colspan="4"
+               class="text-center py-4"
+            >
+               No recent projects available.
+            </td>
+         </tr>
+         {% endfor %}
+      </tbody>
+   </table>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+   <div class="bg-red-100 p-4 rounded shadow">
+      <h2 class="text-xl font-bold">Average Project Budget</h2>
+      <p class="text-2xl">{{ avg_project_budget }}</p>
+   </div>
+   <div class="bg-teal-100 p-4 rounded shadow">
+      <h2 class="text-xl font-bold">Freelancer Average Hourly Rate</h2>
+      <p class="text-2xl text-blue-500">{{ avg_freelancer_rate }} $</p>
+   </div>
+   <div class="bg-indigo-100 p-4 rounded shadow">
+      <h2 class="text-xl font-bold">Project Distribution by Field</h2>
+      <ul>
+         {% for field, count in project_field_distribution.items %}
+         <li>{{ field }}: {{ count }}</li>
+         {% endfor %}
+      </ul>
+   </div>
+</div>
+
+<p class="mt-6">
+   <a
+      href="/clients/"
+      class="text-blue-500 underline"
+      >View All Clients</a
+   >
+</p>
+
+{% endblock %}

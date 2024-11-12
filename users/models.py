@@ -7,6 +7,7 @@ class CustomUser(AbstractUser):
         ('User', 'User'),
     )
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='User')
+    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     groups = models.ManyToManyField(
         Group,
         related_name='custom_user_set',

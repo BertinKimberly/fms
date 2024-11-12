@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate,logout
-from .forms import CustomUserCreationForm, CustomAuthenticationForm
+from .forms import CustomUserCreationForm, CustomAuthenticationForm, ProfilePictureForm
 from django.contrib.auth.decorators import login_required
 
 def register(request):
@@ -34,3 +34,20 @@ def user_profile(request):
 def user_logout(request):
     logout(request)
     return redirect('/users/login') 
+
+@login_required
+def profile_pic(request):
+    user = request.user
+    if request.method == 'POST':
+        form = ProfilePictureForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')  
+    else:
+        form = ProfilePictureForm(instance=user)
+    
+    context = {
+        'user': user,
+        'form': form,
+    }
+    return render(request, 'users/profile.html', context)
