@@ -1,6 +1,6 @@
 # Freelance Management System
 
-This is a Django-based web application that allows freelance managers and clients to streamline project management, track tasks, communicate, and monitor project milestones.
+This is a Django-based web application that allows freelance managers and clients to streamline project management.
 
 ### Features
 
