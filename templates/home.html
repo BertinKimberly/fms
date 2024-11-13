@@ -1,5 +1,5 @@
-{% extends 'base.html' %} 
-{% block title %}Home{% endblock %} 
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
 
 {% block content%}
 <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
@@ -31,40 +31,8 @@
 </div>
 
 <div class="bg-white shadow rounded-lg p-4 mb-8">
-   <h2 class="text-2xl font-semibold mb-4">10 Most Recent Projects</h2>
-   <table
-      class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md"
-   >
-      <thead>
-         <tr class="bg-gray-200 text-gray-700">
-            <th class="py-2 px-4 border-b">Name</th>
-            <th class="py-2 px-4 border-b">Field</th>
-            <th class="py-2 px-4 border-b">Budget</th>
-            <th class="py-2 px-4 border-b">Description</th>
-         </tr>
-      </thead>
-      <tbody>
-         {% for project in recent_projects %}
-         <tr class="hover:bg-gray-100">
-            <td class="py-2 px-4 border-b">{{ project.name }}</td>
-            <td class="py-2 px-4 border-b">{{ project.field }}</td>
-            <td class="py-2 px-4 border-b">{{ project.budget }}</td>
-            <td class="py-2 px-4 border-b">
-               {{ project.description|truncatewords:10 }}
-            </td>
-         </tr>
-         {% empty %}
-         <tr>
-            <td
-               colspan="4"
-               class="text-center py-4"
-            >
-               No recent projects available.
-            </td>
-         </tr>
-         {% endfor %}
-      </tbody>
-   </table>
+   <h2 class="text-2xl font-semibold mb-4">Recent Projects and Budgets</h2>
+   <canvas id="projectsChart" class="w-full h-64"></canvas>
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -93,5 +61,40 @@
       >View All Clients</a
    >
 </p>
+
+<script>
+   const ctx = document.getElementById('projectsChart').getContext('2d');
+   const projectsChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+         labels: [{% for project in recent_projects %} '{{ project.name }}', {% endfor %}],
+         datasets: [{
+            label: 'Budget ($)',
+            data: [{% for project in recent_projects %} {{ project.budget }}, {% endfor %}],
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+         }]
+      },
+      options: {
+         responsive: true,
+         scales: {
+            y: {
+               beginAtZero: true,
+               title: {
+                  display: true,
+                  text: 'Budget ($)'
+               }
+            },
+            x: {
+               title: {
+                  display: true,
+                  text: 'Projects'
+               }
+            }
+         }
+      }
+   });
+</script>
 
 {% endblock %}
