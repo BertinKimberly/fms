@@ -55,6 +55,7 @@
       <h2 class="text-2xl font-bold mb-4">Update Profile Picture</h2>
       <form
          method="POST"
+         action="/users/profile/picture/"
          enctype="multipart/form-data"
       >
          {% csrf_token %} {{ form.as_p }}

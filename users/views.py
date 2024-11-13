@@ -29,7 +29,8 @@ def user_login(request):
 @login_required(login_url="/users/login/")
 def user_profile(request):
     user=request.user
-    return render(request,'users/profile.html',{'user':user})
+    form = ProfilePictureForm(instance=user)
+    return render(request,'users/profile.html',{'user':user,'form':form})
 
 def user_logout(request):
     logout(request)
@@ -42,10 +43,10 @@ def profile_pic(request):
         form = ProfilePictureForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('profile')  
+            return redirect('/users/profile/')  # Redirect to refresh the page
     else:
         form = ProfilePictureForm(instance=user)
-    
+
     context = {
         'user': user,
         'form': form,
