@@ -10,7 +10,7 @@ This is a Django-based web application that allows freelance managers and client
 
 #### Technologies Used
 - `Backend`: Django
-- `Frontend`: HTML, CSS
+- `Frontend`: HTML, CSS,JS
 - `Database`: PostgreSQL
 
 ## Installation
