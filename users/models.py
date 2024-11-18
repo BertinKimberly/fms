@@ -4,7 +4,8 @@ from django.db import models
 class CustomUser(AbstractUser):
     ROLE_CHOICES = (
         ('Admin', 'Admin'),
-        ('User', 'User'),
+         ('Freelancer', 'Freelancer'),
+        ('Client', 'Client'),
     )
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='User')
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
